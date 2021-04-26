@@ -1,32 +1,18 @@
 #pragma once
 
 #include "bakkesmod/plugin/bakkesmodplugin.h"
-#include "bakkesmod/wrappers/GameObject/Stats/StatEventWrapper.h"
 #include "bakkesmod/wrappers/UniqueIDWrapper.h"
+#include "Stats.h"
 
 using namespace std;
-
-typedef map<string, int> StatMap;
-
-struct StatHUDEvent {
-  uintptr_t Actor;
-  uintptr_t Victim;
-  uintptr_t StatEvent;
-};
-
-struct StatEvent {
-  uintptr_t Actor;
-  uintptr_t StatEvent;
-  uintptr_t Count;
-};
 
 class TrackMyStats : public BakkesMod::Plugin::BakkesModPlugin {
 private:
 	UniqueIDWrapper uniqueID;
-	float currentMMR;
 	std::unique_ptr<MMRNotifierToken> mmrNotifier;
 	filesystem::path dataDir;
-	StatMap stats;
+	map<string, string> rating;
+	Stats stats;
 
 public:
 	virtual void onLoad();
@@ -37,7 +23,7 @@ public:
 	void HandleStatTickerEvent(ServerWrapper caller, void* args);
 	void HandleGameStart();
 	void HandleGameEnd();
-	void GetMMR(UniqueIDWrapper id);
+	map<string, string> GetMMR(UniqueIDWrapper id);
 
 	GameSettingPlaylistWrapper GetCurrentPlaylist();
 	PriWrapper GetPrimaryPlayer();
@@ -45,6 +31,6 @@ public:
 	bool InValidGame();
 
 	void Stringify();
-	void IncrementStat(string label);
 	void HandleDemolition(PriWrapper actor, PriWrapper victim);
+	void ResetRating();
 };

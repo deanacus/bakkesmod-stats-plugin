@@ -91,10 +91,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="PlayerStats.cpp" />
+    <ClCompile Include="Stats.cpp" />
     <ClCompile Include="TrackMyStats.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Dicts.h" />
+    <ClInclude Include="PlayerStats.h" />
+    <ClInclude Include="Stats.h" />
     <ClInclude Include="TrackMyStats.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
